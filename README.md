@@ -1,2 +1,2 @@
 # Library-TOP
-A Javascriot OOP Library
+A Javascript OOP Library
