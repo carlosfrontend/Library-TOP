@@ -34,7 +34,7 @@ body {
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 6vh;
   font-weight: 900;
   font-style: italic;
   color: #889900;
@@ -65,14 +65,14 @@ body {
   bottom: 0;
 }
 .closed-book-logo {
-  width: 3em;
+  width: 6vh;
 }
 
 .add {
   color: #889900;
   position: absolute;
   right: 1em;
-  font-size: 4rem;
+  font-size: 6vh;
   cursor: pointer;
 }
 
@@ -175,4 +175,78 @@ body {
     color:#1c1c0e;
     cursor: pointer;
     font-size: 2rem;
+}
+
+#favDialog{
+    margin: 0 auto;
+    top:10em;
+    padding: 1em 2em;
+    border:none;
+    border-radius: 25px;
+    background-color: #160d0de6;
+}
+
+#favDialog h3{
+    font-size: 2rem;
+    font-weight: 900;
+    color:#7a8900;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    gap:.5em;
+}
+form  p  {
+    display: flex;
+    flex-direction: column;
+    gap:.2em;
+}
+
+form label {
+    font-weight: 900;
+    color:#7a8900;
+}
+
+form label, form input, form select {
+    font-size: 1rem;
+}
+form input{
+    color:#7a8900;
+    font-weight: bold;
+    outline: none;
+}
+
+button#addBookBtn{
+    background-color:#7a8900;
+    color:#fff;
+    width: 10em;
+    height: 2.6em;
+    border:none;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+button#cancel{
+    background-color:#892700;
+    color:#fff;
+    width: 10em;
+    height: 2.6em;
+    border:none;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+#isbn-Num{
+    width: 40%;
+}
+
+select, #pagesNum{
+    width: 28%;
 }

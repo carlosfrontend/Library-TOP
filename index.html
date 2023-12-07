@@ -19,6 +19,60 @@
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
+    <dialog id="favDialog">
+      <h3>Add a New Book</h3>
+      <form method="dialog">
+        <section>
+          <p>
+            <label for="title" id="title">Book Title:</label>
+            <input type="text" id="title" placeholder="Book Title" />
+          </p>
+        </section>
+        <section>
+          <p>
+            <label for="title" id="author">Author:</label>
+            <input type="text" id="author" placeholder="Author" />
+          </p>
+        </section>
+        <section>
+          <p>
+            <label for="title" id="isbn-Num">ISBN:</label>
+            <input type="number" id="isbn-Num" placeholder="0000000000000" />
+          </p>
+        </section>
+        <section>
+          <p>
+            <label for="avatar">Choose a profile picture:</label>
+
+            <input
+              type="file"
+              id="avatar"
+              name="avatar"
+              accept="image/png, image/jpeg"
+            />
+          </p>
+        </section>
+        <section>
+          <p>
+            <label for="title" id="pagesNum">Pages Nº:</label>
+            <input type="number" id="pagesNum" placeholder="725" max="8000" />
+          </p>
+        </section>
+        <section>
+          <p>
+            <label for="read">Already Read:</label>
+            <select name="" id="">
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+          </p>
+        </section>
+        <menu>
+          <button id="addBookBtn" type="submit">Add Book</button>
+          <button id="cancel" type="reset">Cancel</button>
+        </menu>
+      </form>
+    </dialog>
     <div class="container">
       <header class="header">
         <img
@@ -26,11 +80,10 @@
           src="./images/book-closed-svgrepo-com.svg"
           alt="closed book logo"
         />
+        <i translate="no" class="material-icons add">add_circle</i>
         <h1 class="title">Library</h1>
-        <i class="material-icons add">add_circle</i>
       </header>
-      <div class="content">
-      </div>
+      <div class="content"></div>
       <footer class="footer">
         <a
           href="https://github.com/carlosfrontend"

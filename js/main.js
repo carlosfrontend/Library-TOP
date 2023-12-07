@@ -1,5 +1,21 @@
 const content = document.querySelector(".content");
 
+(function () {
+  var updateButton = document.querySelector(".add");
+  var cancelButton = document.getElementById("cancel");
+  var favDialog = document.getElementById("favDialog");
+
+  // Update button opens a modal dialog
+  updateButton.addEventListener("click", function () {
+    favDialog.showModal();
+  });
+
+  // Form cancel button closes the dialog box
+  cancelButton.addEventListener("click", function () {
+    favDialog.close();
+  });
+})();
+
 const myLibrary = [
   {
     title: "The Name Of The Rose",
@@ -103,7 +119,7 @@ function showBooks(myLibrary) {
     />
   <label for="alreadyRead">Already Read</label>
   <div class="book-delete-container">
-  <i class="material-icons delete">delete_forever</i>
+  <i translate="no" class="material-icons delete">delete_forever</i>
   </div>
 </div>
 </div>
@@ -112,30 +128,3 @@ function showBooks(myLibrary) {
 }
 
 showBooks(myLibrary);
-
-{
-  /* <div class="book-card">
-<div class="book-title-container">
-  <h3 class="boot-title">The Name Of The Rose</h3>
-  <p class="book-author">Umberto Eco</p>
-</div>
-<div class="book-thumbnail-container">
-  <img class="thumbnail" src="./images/name_of_the_rose.jpg" alt="" />
-</div>
-<div class="book-data-container">
-  <span class="book-isbn">ISBN: 9788497592581</span>
-  <span class="book-pages">Pages Nº: 784</span>
-</div>
-<div class="book-read-container">
-  <input
-    type="checkbox"
-    name="alreadyRead"
-    id="alreadyRead"
-    name="alreadyRead"
-    checked="true"
-    value="true"
-  />
-  <label for="alreadyRead">Already Read</label>
-</div>
-</div> */
-}
