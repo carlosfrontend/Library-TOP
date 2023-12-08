@@ -209,7 +209,7 @@ function addBookToLibrary() {
     const trashLogo = document.createElement("i");
     bookTitle.textContent = newBook.title;
     bookAuthor.textContent = newBook.author;
-    newBook.src = "../images/book-placeholder-image.svg";
+    newBook.src = "images/book-placeholder-image.svg";
     bookImg.src = newBook.src;
     bookIsbn.textContent = newBook.isbn;
     bookPages.textContent = newBook.pages;
