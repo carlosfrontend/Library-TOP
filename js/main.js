@@ -1,5 +1,4 @@
 const content = document.querySelector(".content");
-
 (function () {
   var updateButton = document.querySelector(".add");
   var cancelButton = document.getElementById("cancel");
@@ -16,115 +15,243 @@ const content = document.querySelector(".content");
   });
 })();
 
-const myLibrary = [
-  {
-    title: "The Name Of The Rose",
-    author: "Umberto Eco",
-    pages: 784,
-    alreadyRead: true,
-    isbn: 9788497592581,
-    src: 'images/name_of_the_rose.jpg'
-  },
-  {
-    title: "The Lord Of The Rings",
-    author: "J.R.R. Tolkien",
-    pages: 1482,
-    alreadyRead: true,
-    isbn: 9780008471286,
-    src: 'images/lord_of_the_rings.jpg'
-  },
-  {
-    title: "Great Expectations",
-    author: "Charles Dickens",
-    pages: 400,
-    alreadyRead: false,
-    isbn: 9780486415864,
-    src: 'images/great_expectations.jpg'
-  },
-  {
-    title: "The American Planet",
-    author: "Vicente Verdú",
-    pages: 176,
-    alreadyRead: true,
-    isbn: 9788433905307,
-    src:'images/the_american_planet.jpg'
-  },
-  {
-    title: "Dramatic prophecies of the Great Pyramid",
-    author: "Rodolfo Benavides",
-    pages: 382,
-    alreadyRead: true,
-    isbn: 9788497592581,
-    src: 'images/dramatic_profecies.jpg'
-  },
-  {
-    title: "Eloquent Javascript",
-    author: "Marijn Haverbeke",
-    pages: 699,
-    alreadyRead: false,
-    isbn: 9781593279509,
-    src:'images/eloquent_javascript.jpg'
-  },
-  {
-    title: "San Manuel Bueno Mártir",
-    author: "Miguel de Unamuno",
-    pages: 172,
-    alreadyRead: true,
-    isbn: 9780828825788,
-    src:'images/san_manuel_bueno_martir.jpg'
-  },
-  {
-    title: "The Principles of Object-Oriented JavaScript",
-    author: "Nicholas C. Zakas",
-    pages: 120,
-    alreadyRead: false,
-    isbn: 9781593275402,
-    src:'images/principies_oop.jpg'
-  },
-  {
-    title: "Journey To The Centre Of The Earth",
-    author: "Julio Verne",
-    pages: 72,
-    alreadyRead: false,
-    isbn: 9788467732023,
-    src:'images/journey_center_earth.jpg'
-  },
-];
+let myLibrary = [];
 
-function Book() {}
+function Book(title, author, isbn, src, pages, read) {
+  this.title = title;
+  this.author = author;
+  this.isbn = isbn;
+  this.src = src;
+  this.pages = pages;
+  this.read = read;
+}
+Book.prototype.toogleRead = function () {
+  this.read === true ? (this.read = false) : (this.read = true);
+  return this.read;
+};
 
-function addBookToLibrary() {}
+const book1 = new Book(
+  "The Name Of The Rose",
+  "Umberto Eco",
+  "9788497592581",
+  "images/name_of_the_rose.jpg",
+  784,
+  true
+);
+const book2 = new Book(
+  "The Lord Of The Rings",
+  "J.R.R. Tolkien",
+  9780008471286,
+  "images/lord_of_the_rings.jpg",
+  1482,
+  true
+);
+const book3 = new Book(
+  "Great Expectations",
+  "Charles Dickens",
+  9780486415864,
+  "images/great_expectations.jpg",
+  400,
+  false
+);
+const book4 = new Book(
+  "The American Planet",
+  "Vicente Verdú",
+  9788433905307,
+  "images/the_american_planet.jpg",
+  176,
+  true
+);
+const book5 = new Book(
+  "Dramatic prophecies of the Great Pyramid",
+  "Rodolfo Benavides",
+  9788497592581,
+  "images/dramatic_profecies.jpg",
+  382,
+  true
+);
+const book6 = new Book(
+  "Eloquent Javascript",
+  "Marijn Haverbeke",
+  9781593279509,
+  "images/eloquent_javascript.jpg",
+  699,
+  false
+);
+const book7 = new Book(
+  "San Manuel Bueno Mártir",
+  "Miguel de Unamuno",
+  9780828825788,
+  "images/san_manuel_bueno_martir.jpg",
+  172,
+  true
+);
+const book8 = new Book(
+  "The Principles of Object-Oriented JavaScript",
+  "Nicholas C. Zakas",
+  9781593275402,
+  "images/principies_oop.jpg",
+  120,
+  false
+);
+const book9 = new Book(
+  "Journey To The Centre Of The Earth",
+  "Julio Verne",
+  9788467732023,
+  "images/journey_center_earth.jpg",
+  72,
+  false
+);
+let newBook = {};
 
 function showBooks(myLibrary) {
-  myLibrary.forEach((book) => {
-    content.innerHTML += `
-<div class="book-card">
-  <div class="book-title-container">
-    <h3 class="boot-title">${book.title}</h3>
-    <p class="book-author">${book.author}</p>
-  </div>
-  <div class="book-thumbnail-container">
-    <img class="thumbnail" src="${book.src}" />
-  </div>
-  <div class="book-data-container">
-    <span class="book-isbn">ISBN: ${book.isbn}</span>
-    <span class="book-pages">Pages: ${book.pages}</span>
-  </div>
-  <div class="book-read-container">
-    <input
-      type="checkbox"
-      name="alreadyRead"
-      id="alreadyRead"
-      name="alreadyRead"
-    />
-  <label for="alreadyRead">Already Read</label>
-  <div class="book-delete-container">
-  <i translate="no" class="material-icons delete">delete_forever</i>
-  </div>
-</div>
-</div>
-     `;
+  myLibrary.push(book1);
+  myLibrary.push(book2);
+  myLibrary.push(book3);
+  myLibrary.push(book4);
+  myLibrary.push(book5);
+  myLibrary.push(book6);
+  myLibrary.push(book7);
+  myLibrary.push(book8);
+  myLibrary.push(book9);
+
+  for (let i = 0; i < myLibrary.length; i++) {
+    const bookCard = document.createElement("div");
+    const bookTitleContainer = document.createElement("div");
+    const bookTitle = document.createElement("h3");
+    const bookAuthor = document.createElement("p");
+    const bookThumbnailContainer = document.createElement("div");
+    const bookImg = document.createElement("img");
+    const bookDataContainer = document.createElement("div");
+    const bookIsbn = document.createElement("span");
+    const bookPages = document.createElement("span");
+    const bookReadContainer = document.createElement("div");
+    const bookInput = document.createElement("input");
+    const bookLabel = document.createElement("label");
+    const bookDeleteContainer = document.createElement("div");
+    const trashLogo = document.createElement("i");
+    bookTitle.textContent = myLibrary[i].title;
+    bookAuthor.textContent = myLibrary[i].author;
+    bookImg.src = myLibrary[i].src;
+    bookIsbn.textContent = myLibrary[i].isbn;
+    bookPages.textContent = myLibrary[i].pages;
+    bookLabel.textContent = "Already Read";
+    bookCard.classList.add("book-card");
+    bookTitleContainer.classList.add("book-title-container");
+    content.appendChild(bookCard);
+    bookCard.appendChild(bookTitleContainer);
+    bookTitle.className = "book-title";
+    bookTitleContainer.appendChild(bookTitle);
+    bookAuthor.classList.add("book-author");
+    bookTitleContainer.appendChild(bookAuthor);
+    bookThumbnailContainer.className = "book-thumbnail-container";
+    bookCard.appendChild(bookThumbnailContainer);
+    bookImg.classList.add("thumbnail");
+    bookImg.alt = "book thumbnail";
+    bookThumbnailContainer.appendChild(bookImg);
+    bookDataContainer.classList.add("book-data-container");
+    bookCard.appendChild(bookDataContainer);
+    bookIsbn.classList.add("book-isbn");
+    bookDataContainer.appendChild(bookIsbn);
+    bookPages.classList.add("book-pages");
+    bookDataContainer.appendChild(bookPages);
+    bookCard.appendChild(bookReadContainer);
+    bookReadContainer.classList.add("book-read-container");
+    bookInput.setAttribute("type", "checkbox");
+    bookInput.setAttribute("id", `alreadyRead-${i}`);
+    bookInput.checked = myLibrary[i].read;
+    bookInput.addEventListener("click", (ev) => {
+      ev.target.checked = myLibrary[i].toogleRead(read);
+    });
+    bookReadContainer.append(bookInput);
+    bookLabel.setAttribute("for", `alreadyRead-${i}`);
+    bookReadContainer.appendChild(bookLabel);
+    bookReadContainer.appendChild(bookDeleteContainer);
+    bookDeleteContainer.classList.add("book-delete-container");
+    trashLogo.setAttribute("translate", "no");
+    trashLogo.classList.add("material-icons", "delete");
+    trashLogo.textContent = "delete_forever";
+    bookDeleteContainer.appendChild(trashLogo);
+  }
+}
+function addBookToLibrary() {
+  bookForm.addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const bookForm = document.getElementById("bookForm");
+    const title = document.getElementById("title");
+    const author = document.getElementById("author");
+    const isbn = document.getElementById("isbn-Num");
+    const src = document.getElementById("avatar");
+    const pages = document.getElementById("pagesNum");
+    const read = document.getElementById("read");
+    
+    newBook = new Book(
+      title.value,
+      author.value,
+      isbn.value,
+      src.value,
+      pages.value,
+      read.value === 'true' ? read.value = true : read.value = false
+    );
+    const bookCard = document.createElement("div");
+    const bookTitleContainer = document.createElement("div");
+    const bookTitle = document.createElement("h3");
+    const bookAuthor = document.createElement("p");
+    const bookThumbnailContainer = document.createElement("div");
+    const bookImg = document.createElement("img");
+    const bookDataContainer = document.createElement("div");
+    const bookIsbn = document.createElement("span");
+    const bookPages = document.createElement("span");
+    const bookReadContainer = document.createElement("div");
+    const bookInput = document.createElement("input");
+    const bookLabel = document.createElement("label");
+    const bookDeleteContainer = document.createElement("div");
+    const trashLogo = document.createElement("i");
+    bookTitle.textContent = newBook.title;
+    bookAuthor.textContent = newBook.author;
+    newBook.src = "../images/book-placeholder-image.svg";
+    bookImg.src = newBook.src;
+    bookIsbn.textContent = newBook.isbn;
+    bookPages.textContent = newBook.pages;
+    bookLabel.textContent = "Already Read";
+    bookCard.classList.add("book-card");
+    bookTitleContainer.classList.add("book-title-container");
+    content.appendChild(bookCard);
+    bookCard.appendChild(bookTitleContainer);
+    bookTitle.className = "book-title";
+    bookTitleContainer.appendChild(bookTitle);
+    bookAuthor.classList.add("book-author");
+    bookTitleContainer.appendChild(bookAuthor);
+    bookThumbnailContainer.className = "book-thumbnail-container";
+    bookCard.appendChild(bookThumbnailContainer);
+    bookImg.classList.add("thumbnail");
+    bookImg.alt = "book thumbnail";
+    bookThumbnailContainer.appendChild(bookImg);
+    bookDataContainer.classList.add("book-data-container");
+    bookCard.appendChild(bookDataContainer);
+    bookIsbn.classList.add("book-isbn");
+    bookDataContainer.appendChild(bookIsbn);
+    bookPages.classList.add("book-pages");
+    bookDataContainer.appendChild(bookPages);
+    bookCard.appendChild(bookReadContainer);
+    bookReadContainer.classList.add("book-read-container");
+    bookInput.setAttribute("type", "checkbox");
+    bookInput.setAttribute("id", `alreadyRead-${++myLibrary.length - 1}`);
+    bookInput.checked = newBook.read;
+    bookInput.addEventListener('click', (e) => {
+      e.target.checked = newBook.toogleRead(newBook.read);
+    });
+    bookLabel.setAttribute("for", `alreadyRead-${myLibrary.length - 1}`);
+    bookReadContainer.append(bookInput);
+    bookReadContainer.appendChild(bookLabel);
+    bookReadContainer.appendChild(bookDeleteContainer);
+    bookDeleteContainer.classList.add("book-delete-container");
+    trashLogo.setAttribute("translate", "no");
+    trashLogo.classList.add("material-icons", "delete");
+    trashLogo.textContent = "delete_forever";
+    bookDeleteContainer.appendChild(trashLogo);
   });
 }
 
+addBookToLibrary();
 showBooks(myLibrary);
