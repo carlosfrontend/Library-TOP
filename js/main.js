@@ -1,4 +1,13 @@
-const content = document.querySelector(".content");
+const content = document.querySelector("#content.content");
+const bookCardsDom = [...document.querySelectorAll(".book-card")];
+const titlesDom = [...document.querySelectorAll(".book-title")];
+const authorsDom = [...document.querySelectorAll(".book-author")];
+const srcDom = [...document.querySelectorAll(".thumbnail")];
+const isbnDom = [...document.querySelectorAll(".book-isbn")];
+const pagesDom = [...document.querySelectorAll(".book-pages")];
+const readDom = [...document.querySelectorAll(".read")];
+const bookForm = document.getElementById("bookForm");
+
 (function () {
   var updateButton = document.querySelector(".add");
   var cancelButton = document.getElementById("cancel");
@@ -102,156 +111,160 @@ const book9 = new Book(
   72,
   false
 );
+myLibrary.push(book1);
+myLibrary.push(book2);
+myLibrary.push(book3);
+myLibrary.push(book4);
+myLibrary.push(book5);
+myLibrary.push(book6);
+myLibrary.push(book7);
+myLibrary.push(book8);
+myLibrary.push(book9);
+
 let newBook = {};
 
-function showBooks(myLibrary) {
-  myLibrary.push(book1);
-  myLibrary.push(book2);
-  myLibrary.push(book3);
-  myLibrary.push(book4);
-  myLibrary.push(book5);
-  myLibrary.push(book6);
-  myLibrary.push(book7);
-  myLibrary.push(book8);
-  myLibrary.push(book9);
+function showBooks() {
+  bookCardsDom.map((el, index) => {
+    if (el !== null) {
+      el.dataset.index = index;
+    }
+  });
 
-  for (let i = 0; i < myLibrary.length; i++) {
-    const bookCard = document.createElement("div");
-    const bookTitleContainer = document.createElement("div");
-    const bookTitle = document.createElement("h3");
-    const bookAuthor = document.createElement("p");
-    const bookThumbnailContainer = document.createElement("div");
-    const bookImg = document.createElement("img");
-    const bookDataContainer = document.createElement("div");
-    const bookIsbn = document.createElement("span");
-    const bookPages = document.createElement("span");
-    const bookReadContainer = document.createElement("div");
-    const bookInput = document.createElement("input");
-    const bookLabel = document.createElement("label");
-    const bookDeleteContainer = document.createElement("div");
-    const trashLogo = document.createElement("i");
-    bookTitle.textContent = myLibrary[i].title;
-    bookAuthor.textContent = myLibrary[i].author;
-    bookImg.src = myLibrary[i].src;
-    bookIsbn.textContent = myLibrary[i].isbn;
-    bookPages.textContent = myLibrary[i].pages;
-    bookLabel.textContent = "Already Read";
-    bookCard.classList.add("book-card");
-    bookTitleContainer.classList.add("book-title-container");
-    content.appendChild(bookCard);
-    bookCard.appendChild(bookTitleContainer);
-    bookTitle.className = "book-title";
-    bookTitleContainer.appendChild(bookTitle);
-    bookAuthor.classList.add("book-author");
-    bookTitleContainer.appendChild(bookAuthor);
-    bookThumbnailContainer.className = "book-thumbnail-container";
-    bookCard.appendChild(bookThumbnailContainer);
-    bookImg.classList.add("thumbnail");
-    bookImg.alt = "book thumbnail";
-    bookThumbnailContainer.appendChild(bookImg);
-    bookDataContainer.classList.add("book-data-container");
-    bookCard.appendChild(bookDataContainer);
-    bookIsbn.classList.add("book-isbn");
-    bookDataContainer.appendChild(bookIsbn);
-    bookPages.classList.add("book-pages");
-    bookDataContainer.appendChild(bookPages);
-    bookCard.appendChild(bookReadContainer);
-    bookReadContainer.classList.add("book-read-container");
-    bookInput.setAttribute("type", "checkbox");
-    bookInput.setAttribute("id", `alreadyRead-${i}`);
-    bookInput.checked = myLibrary[i].read;
-    bookInput.addEventListener("click", (ev) => {
-      ev.target.checked = myLibrary[i].toogleRead(read);
+  titlesDom.map((el, index) => {
+    el.textContent = myLibrary[index].title;
+  });
+
+  authorsDom.map((el, index) => {
+    el.textContent = myLibrary[index].author;
+  });
+
+  srcDom.map((el, index) => {
+    el.src = myLibrary[index].src;
+  });
+
+  isbnDom.map((el, index) => {
+    el.textContent = myLibrary[index].isbn;
+  });
+
+  pagesDom.map((el, index) => {
+    el.textContent = myLibrary[index].pages;
+  });
+
+  readDom.map((el, index) => {
+    el.checked = myLibrary[index].read;
+    el.addEventListener("click", () => {
+      el.checked = myLibrary[index].toogleRead(read);
     });
-    bookReadContainer.append(bookInput);
-    bookLabel.setAttribute("for", `alreadyRead-${i}`);
-    bookReadContainer.appendChild(bookLabel);
-    bookReadContainer.appendChild(bookDeleteContainer);
-    bookDeleteContainer.classList.add("book-delete-container");
-    trashLogo.setAttribute("translate", "no");
-    trashLogo.classList.add("material-icons", "delete");
-    trashLogo.textContent = "delete_forever";
-    bookDeleteContainer.appendChild(trashLogo);
-  }
+  });
 }
+
 function addBookToLibrary() {
   bookForm.addEventListener("submit", (ev) => {
     ev.preventDefault();
-    const bookForm = document.getElementById("bookForm");
     const title = document.getElementById("title");
     const author = document.getElementById("author");
     const isbn = document.getElementById("isbn-Num");
     const src = document.getElementById("avatar");
     const pages = document.getElementById("pagesNum");
-    const read = document.getElementById("read");
-    
-    newBook = new Book(
+
+    const newBook = new Book(
       title.value,
       author.value,
-      isbn.value,
+      parseInt(isbn.value),
       src.value,
-      pages.value,
-      read.value === 'true' ? read.value = true : read.value = false
+      parseInt(pages.value),
+      read.value === "true"
+        ? (this.read.value = true)
+        : (this.read.value = false)
     );
-    const bookCard = document.createElement("div");
-    const bookTitleContainer = document.createElement("div");
-    const bookTitle = document.createElement("h3");
-    const bookAuthor = document.createElement("p");
-    const bookThumbnailContainer = document.createElement("div");
-    const bookImg = document.createElement("img");
-    const bookDataContainer = document.createElement("div");
-    const bookIsbn = document.createElement("span");
-    const bookPages = document.createElement("span");
-    const bookReadContainer = document.createElement("div");
-    const bookInput = document.createElement("input");
-    const bookLabel = document.createElement("label");
-    const bookDeleteContainer = document.createElement("div");
-    const trashLogo = document.createElement("i");
-    bookTitle.textContent = newBook.title;
-    bookAuthor.textContent = newBook.author;
-    newBook.src = "images/book-placeholder-image.svg";
-    bookImg.src = newBook.src;
-    bookIsbn.textContent = newBook.isbn;
-    bookPages.textContent = newBook.pages;
-    bookLabel.textContent = "Already Read";
-    bookCard.classList.add("book-card");
-    bookTitleContainer.classList.add("book-title-container");
-    content.appendChild(bookCard);
-    bookCard.appendChild(bookTitleContainer);
-    bookTitle.className = "book-title";
-    bookTitleContainer.appendChild(bookTitle);
-    bookAuthor.classList.add("book-author");
-    bookTitleContainer.appendChild(bookAuthor);
-    bookThumbnailContainer.className = "book-thumbnail-container";
-    bookCard.appendChild(bookThumbnailContainer);
-    bookImg.classList.add("thumbnail");
-    bookImg.alt = "book thumbnail";
-    bookThumbnailContainer.appendChild(bookImg);
-    bookDataContainer.classList.add("book-data-container");
-    bookCard.appendChild(bookDataContainer);
-    bookIsbn.classList.add("book-isbn");
-    bookDataContainer.appendChild(bookIsbn);
-    bookPages.classList.add("book-pages");
-    bookDataContainer.appendChild(bookPages);
-    bookCard.appendChild(bookReadContainer);
-    bookReadContainer.classList.add("book-read-container");
-    bookInput.setAttribute("type", "checkbox");
-    bookInput.setAttribute("id", `alreadyRead-${++myLibrary.length - 1}`);
-    bookInput.checked = newBook.read;
-    bookInput.addEventListener('click', (e) => {
-      e.target.checked = newBook.toogleRead(newBook.read);
+    console.log(newBook.read);
+    const newBookCard = document.createElement("div");
+    newBookCard.classList = "book-card";
+    newBookCard.innerHTML += `<div class="book-title-container">
+    <h3 class="book-title">${newBook.title}</h3>
+    <p class="book-author">${newBook.author}</p>
+  </div>
+  <div class="book-thumbnail-container">
+    <img
+      class="thumbnail"
+      src="${(newBook.src.value = "images/book-placeholder-image.svg")}"
+      class="thumbnail"
+      alt="book thumbnail"
+    />
+  </div>
+  <div class="book-data-container">
+    <span class="book-isbn">${newBook.isbn}</span><span class="book-pages">${
+      newBook.pages
+    }</span>
+  </div>
+  <div class="book-read-container">
+    <input class="read" type="checkbox" id="alreadyRead-${
+      myLibrary.length + 1 - 1
+    }" /><label
+      for="alreadyRead-${myLibrary.length + 1 - 1}"
+      >Already Read</label
+    >
+    <div class="book-delete-container">
+      <i translate="no" class="material-icons delete">delete_forever</i>
+    </div>
+  </div>`;
+
+    myLibrary.push(newBook);
+    bookCardsDom.map((el, index) => {
+      if (el !== null) {
+        newBookCard.dataset.index = myLibrary.length - 1;
+      } else {
+        myLibrary.length = 0;
+      }
     });
-    bookLabel.setAttribute("for", `alreadyRead-${myLibrary.length - 1}`);
-    bookReadContainer.append(bookInput);
-    bookReadContainer.appendChild(bookLabel);
-    bookReadContainer.appendChild(bookDeleteContainer);
-    bookDeleteContainer.classList.add("book-delete-container");
-    trashLogo.setAttribute("translate", "no");
-    trashLogo.classList.add("material-icons", "delete");
-    trashLogo.textContent = "delete_forever";
-    bookDeleteContainer.appendChild(trashLogo);
+
+    newBookCard.dataset.index = myLibrary.length - 1;
+
+    content.append(newBookCard);
+    const myInputChecked = content.lastChild.lastChild.firstElementChild;
+    if (newBook.read === true) {
+      myInputChecked.checked = true;
+    } else {
+      myInputChecked.removeAttribute("checked");
+    }
+    myInputChecked.addEventListener("click", () => {
+      myInputChecked.checked = newBook.toogleRead();
+    });
+    console.log(myInputChecked);
+    removeBookFromLibrary();
   });
 }
 
+function removeBookFromLibrary() {
+  const deleteButtons = document.querySelectorAll(".delete");
+  deleteButtons.forEach((btn) =>
+    btn.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+      let deleteQuestion = confirm(
+        "Are you sure you want to delete this book?"
+      );
+      if (deleteQuestion) {
+        let indexForDelete =
+          e.target.parentNode.parentNode.parentNode.dataset.index;
+        bookCardsDom.splice(indexForDelete, 1);
+        e.target.parentNode.parentNode.parentNode.remove();
+        myLibrary.splice(indexForDelete, 1);
+
+        const cards = [...document.querySelectorAll(".book-card")];
+        for (let i = 0; i < myLibrary.length; i++) {
+          for (let j = 0; j < cards.length; j++) {
+            cards[j].dataset.index = j;
+          }
+        }
+
+        // return;
+      } else {
+        return;
+      }
+    })
+  );
+}
+
+showBooks();
 addBookToLibrary();
-showBooks(myLibrary);
+removeBookFromLibrary();

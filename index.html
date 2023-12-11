@@ -25,19 +25,39 @@
         <section>
           <p>
             <label for="title">Book Title:</label>
-            <input type="text" id="title" placeholder="Book Title" required maxlength="30" title="The maxim is of thirty characters" />
+            <input
+              type="text"
+              id="title"
+              placeholder="Book Title"
+              required
+              maxlength="30"
+              title="The maxim is of thirty characters"
+            />
           </p>
         </section>
         <section>
           <p>
             <label for="author">Author:</label>
-            <input type="text" id="author" placeholder="Author" required maxlength="30" title="The maxim is of thirty characters" />
+            <input
+              type="text"
+              id="author"
+              placeholder="Author"
+              required
+              maxlength="30"
+              title="The maxim is of thirty characters"
+            />
           </p>
         </section>
         <section>
           <p>
             <label for="isbn-Num">ISBN:</label>
-            <input type="text" pattern="^(\d{13})?$" maxlength="13" id="isbn-Num" placeholder="13 digits number" />
+            <input
+              type="text"
+              pattern="^(\d{13})?$"
+              maxlength="13"
+              id="isbn-Num"
+              placeholder="13 digits number"
+            />
           </p>
         </section>
         <section>
@@ -55,7 +75,15 @@
         <section>
           <p>
             <label for="pagesNum">Pages Nº:</label>
-            <input type="number" min="1" max="9999" title="The maxim is a number of four digits" id="pagesNum" placeholder="2124" required />
+            <input
+              type="number"
+              min="1"
+              max="9999"
+              title="The maxim is a number of four digits"
+              id="pagesNum"
+              placeholder="2124"
+              required
+            />
           </p>
         </section>
         <section>
@@ -83,7 +111,242 @@
         <i translate="no" class="material-icons add">add_circle</i>
         <h1 class="title">Library</h1>
       </header>
-      <div class="content"></div>
+      <div id="content" class="content">
+        <div class="book-card">
+          <div class="book-title-container">
+            <h3 class="book-title"></h3>
+            <p class="book-author"></p>
+          </div>
+          <div class="book-thumbnail-container">
+            <img
+              class="thumbnail"
+              src=""
+              class="thumbnail"
+              alt="book thumbnail"
+            />
+          </div>
+          <div class="book-data-container">
+            <span class="book-isbn"></span><span class="book-pages"></span>
+          </div>
+          <div class="book-read-container">
+            <input class="read" type="checkbox" id="alreadyRead-0" /><label
+              for="alreadyRead-0"
+              >Already Read</label
+            >
+            <div class="book-delete-container">
+              <i translate="no" class="material-icons delete">delete_forever</i>
+            </div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-title-container">
+            <h3 class="book-title"></h3>
+            <p class="book-author"></p>
+          </div>
+          <div class="book-thumbnail-container">
+            <img
+              class="thumbnail"
+              src=""
+              class="thumbnail"
+              alt="book thumbnail"
+            />
+          </div>
+          <div class="book-data-container">
+            <span class="book-isbn"></span><span class="book-pages"></span>
+          </div>
+          <div class="book-read-container">
+            <input class="read" type="checkbox" id="alreadyRead-1" /><label
+              for="alreadyRead-1"
+              >Already Read</label
+            >
+            <div class="book-delete-container">
+              <i translate="no" class="material-icons delete">delete_forever</i>
+            </div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-title-container">
+            <h3 class="book-title"></h3>
+            <p class="book-author"></p>
+          </div>
+          <div class="book-thumbnail-container">
+            <img
+              class="thumbnail"
+              src=""
+              class="thumbnail"
+              alt="book thumbnail"
+            />
+          </div>
+          <div class="book-data-container">
+            <span class="book-isbn"></span><span class="book-pages"></span>
+          </div>
+          <div class="book-read-container">
+            <input class="read" type="checkbox" id="alreadyRead-2" /><label
+              for="alreadyRead-2"
+              >Already Read</label
+            >
+            <div class="book-delete-container">
+              <i translate="no" class="material-icons delete">delete_forever</i>
+            </div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-title-container">
+            <h3 class="book-title"></h3>
+            <p class="book-author"></p>
+          </div>
+          <div class="book-thumbnail-container">
+            <img
+              class="thumbnail"
+              src=""
+              class="thumbnail"
+              alt="book thumbnail"
+            />
+          </div>
+          <div class="book-data-container">
+            <span class="book-isbn"></span><span class="book-pages"></span>
+          </div>
+          <div class="book-read-container">
+            <input class="read" type="checkbox" id="alreadyRead-3" /><label
+              for="alreadyRead-3"
+              >Already Read</label
+            >
+            <div class="book-delete-container">
+              <i translate="no" class="material-icons delete">delete_forever</i>
+            </div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-title-container">
+            <h3 class="book-title"></h3>
+            <p class="book-author"></p>
+          </div>
+          <div class="book-thumbnail-container">
+            <img
+              class="thumbnail"
+              src=""
+              class="thumbnail"
+              alt="book thumbnail"
+            />
+          </div>
+          <div class="book-data-container">
+            <span class="book-isbn"></span><span class="book-pages"></span>
+          </div>
+          <div class="book-read-container">
+            <input class="read" type="checkbox" id="alreadyRead-4" /><label
+              for="alreadyRead-4"
+              >Already Read</label
+            >
+            <div class="book-delete-container">
+              <i translate="no" class="material-icons delete">delete_forever</i>
+            </div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-title-container">
+            <h3 class="book-title"></h3>
+            <p class="book-author"></p>
+          </div>
+          <div class="book-thumbnail-container">
+            <img
+              class="thumbnail"
+              src=""
+              class="thumbnail"
+              alt="book thumbnail"
+            />
+          </div>
+          <div class="book-data-container">
+            <span class="book-isbn"></span><span class="book-pages"></span>
+          </div>
+          <div class="book-read-container">
+            <input class="read" type="checkbox" id="alreadyRead-5" /><label
+              for="alreadyRead-5"
+              >Already Read</label
+            >
+            <div class="book-delete-container">
+              <i translate="no" class="material-icons delete">delete_forever</i>
+            </div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-title-container">
+            <h3 class="book-title"></h3>
+            <p class="book-author"></p>
+          </div>
+          <div class="book-thumbnail-container">
+            <img
+              class="thumbnail"
+              src=""
+              class="thumbnail"
+              alt="book thumbnail"
+            />
+          </div>
+          <div class="book-data-container">
+            <span class="book-isbn"></span><span class="book-pages"></span>
+          </div>
+          <div class="book-read-container">
+            <input class="read" type="checkbox" id="alreadyRead-6" /><label
+              for="alreadyRead-6"
+              >Already Read</label
+            >
+            <div class="book-delete-container">
+              <i translate="no" class="material-icons delete">delete_forever</i>
+            </div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-title-container">
+            <h3 class="book-title"></h3>
+            <p class="book-author"></p>
+          </div>
+          <div class="book-thumbnail-container">
+            <img
+              class="thumbnail"
+              src=""
+              class="thumbnail"
+              alt="book thumbnail"
+            />
+          </div>
+          <div class="book-data-container">
+            <span class="book-isbn"></span><span class="book-pages"></span>
+          </div>
+          <div class="book-read-container">
+            <input class="read" type="checkbox" id="alreadyRead-7" /><label
+              for="alreadyRead-7"
+              >Already Read</label
+            >
+            <div class="book-delete-container">
+              <i translate="no" class="material-icons delete">delete_forever</i>
+            </div>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-title-container">
+            <h3 class="book-title"></h3>
+            <p class="book-author"></p>
+          </div>
+          <div class="book-thumbnail-container">
+            <img
+              class="thumbnail"
+              src=""
+              class="thumbnail"
+              alt="book thumbnail"
+            />
+          </div>
+          <div class="book-data-container">
+            <span class="book-isbn"></span><span class="book-pages"></span>
+          </div>
+          <div class="book-read-container">
+            <input class="read" type="checkbox" id="alreadyRead-8" /><label
+              for="alreadyRead-8"
+              >Already Read</label
+            >
+            <div class="book-delete-container">
+              <i translate="no" class="material-icons delete">delete_forever</i>
+            </div>
+          </div>
+        </div>
+      </div>
       <footer class="footer">
         <a
           href="https://github.com/carlosfrontend"
