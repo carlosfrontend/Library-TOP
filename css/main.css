@@ -140,10 +140,10 @@ body {
   gap: 0.4em;
 }
 
-.book-read-container label{
-    font-size: 1.3rem;
-    font-weight: 500;
-    color:#1c1c0e;
+.book-read-container label {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #1c1c0e;
 }
 
 .book-thumbnail-container {
@@ -155,7 +155,7 @@ body {
 
 .thumbnail {
   height: 140px;
-  width:90px;
+  width: 90px;
 }
 
 .book-title-container {
@@ -167,110 +167,128 @@ body {
   padding: 0.5em 1em;
 }
 
-.book-delete-container{
-    display: flex;
-    justify-content: end;
+.book-delete-container {
+  display: flex;
+  justify-content: end;
 }
 
-.delete{
-    color:#1c1c0e;
-    cursor: pointer;
-    font-size: 2rem;
+.delete {
+  color: #1c1c0e;
+  cursor: pointer;
+  font-size: 2rem;
 }
 
-#favDialog{
-    margin: 0 auto;
-    top:10em;
-    padding: 1em 2em;
-    border:none;
-    border-radius: 25px;
-    background-color: #160d0de6;
+#favDialog {
+  margin: 0 auto;
+  top: 10em;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 25px;
+  background-color: #160d0de6;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#favDialog[open] {
+  opacity: 1;
+  pointer-events: inherit;
+}
+#favDialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
-#favDialog h3{
-    font-size: 2rem;
-    font-weight: 900;
-    color:#7a8900;
-    flex-direction: column;
-    justify-content: space-around;
+#favDialog h3 {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #7a8900;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    gap:.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  gap: 0.5em;
 }
-form  p  {
-    display: flex;
-    flex-direction: column;
-    gap:.2em;
+form p {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
 }
 
 form label {
-    font-weight: 900;
-    color:#7a8900;
+  font-weight: 900;
+  color: #7a8900;
 }
 
-form label, form input, form select {
-    font-size: 1rem;
+form label,
+form input,
+form select {
+  font-size: 1rem;
 }
-form input{
-    color:#7a8900;
-    font-weight: bold;
-    outline: none;
-}
-
-button#addBookBtn{
-    background-color:#7a8900;
-    color:#fff;
-    width: 10em;
-    height: 2.6em;
-    border:none;
-    border-radius: 4px;
-    font-size: 1.2rem;
-    cursor: pointer;
+form input {
+  color: #7a8900;
+  font-weight: bold;
+  outline: none;
 }
 
-button#cancel{
-    background-color:#892700;
-    color:#fff;
-    width: 10em;
-    height: 2.6em;
-    border:none;
-    border-radius: 4px;
-    font-size: 1.2rem;
-    cursor: pointer;
+button#addBookBtn {
+  background-color: #7a8900;
+  color: #fff;
+  width: 10em;
+  height: 2.6em;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
-#isbn-Num{
-    width: 40%;
+button#cancel {
+  background-color: #892700;
+  color: #fff;
+  width: 10em;
+  height: 2.6em;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
-select, #pagesNum{
-    width: 28%;
+#isbn-Num {
+  width: 40%;
 }
 
-input[type='checkbox']{
+select,
+#pagesNum {
+  width: 28%;
+}
+
+input[type="checkbox"] {
   cursor: pointer;
   height: 20px;
   width: 20px;
-  accent-color: rgb(128, 1, 48)
-  ;
+  accent-color: rgb(128, 1, 48);
 }
 
-.book-card-template{
+.book-card-template {
   display: none;
 }
-.book-card.readEffect{
+.book-card.readEffect {
   text-decoration: line-through;
   filter: saturate(0);
   background-color: #109fe6a8;
 }
 
-
-
 .book-card.readEffect > .delete {
-  color:#000000;
+  color: #000000;
+}
+
+.book-read-container label {
+  user-select: none;
 }

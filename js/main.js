@@ -169,7 +169,6 @@ function showBooks(Book) {
 
 function addBookToLibrary() {
   bookForm.addEventListener("submit", (ev) => {
-    ev.preventDefault();
     const title = document.getElementById("title");
     const author = document.getElementById("author");
     const isbn = document.getElementById("isbn-Num");
