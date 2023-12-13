@@ -35,7 +35,7 @@ body {
 }
 
 .title {
-  font-size: 6vh;
+  font-size: 3rem;
   font-weight: 900;
   font-style: italic;
   color: #889900;
@@ -73,7 +73,7 @@ body {
   color: #889900;
   position: absolute;
   right: 1em;
-  font-size: 6vh;
+  font-size: 3rem;
   cursor: pointer;
 }
 
@@ -173,9 +173,13 @@ body {
 }
 
 .delete {
-  color: #1c1c0e;
+  color: rgba(134, 0, 27, 0.759);
   cursor: pointer;
   font-size: 2rem;
+}
+
+.delete:hover{
+  color:rgba(27, 25, 25, 0.927);
 }
 
 #favDialog {
@@ -192,6 +196,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border:2px solid white;
 }
 #favDialog[open] {
   opacity: 1;
@@ -291,4 +296,57 @@ input[type="checkbox"] {
 
 .book-read-container label {
   user-select: none;
+}
+
+@media screen and (max-width:500px) {
+  html, body{
+    width: 100vw;
+  }
+  
+  .header{
+    width: 100vw;
+  }
+  .title{
+    font-size: 2rem;
+  }
+  .container{
+    width: 100vw;
+  }
+  .footer{
+    width: 100vw;
+  }
+  #content.content{
+   padding-left: 0;
+   padding-right: 0;
+  }
+ 
+  .add{
+    font-size: 2rem;
+    right: .5em;
+  }
+  .footer a * {
+    font-size: 1rem;
+  }
+  #favDialog{
+    width: 100%;
+    height: 85%;
+    top: 3em;
+    padding: .8em 1em;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: #222220f3;
+  }
+  #favDialog h3 {
+    font-size: 1.5rem;
+  }
+  #favDialog * {
+    width: 100%;
+  }
+  #favDialog input, #favDialog label {
+    font-size: 1rem;
+  }
+  #favDialog button{
+    width: 40%;
+    font-size: .8rem;
+  }
 }
