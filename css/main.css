@@ -263,12 +263,14 @@ input[type='checkbox']{
 .book-card-template{
   display: none;
 }
-.book-card.readEffect {
+.book-card.readEffect{
   text-decoration: line-through;
   filter: saturate(0);
   background-color: #109fe6a8;
-  
 }
-.book-card.readEffect > * {
+
+
+
+.book-card.readEffect > .delete {
   color:#000000;
 }

@@ -123,7 +123,7 @@ myLibrary.push(book9);
 
 let newBook = {};
 
-function showBooks() {
+function showBooks(Book) {
   bookCardsDom.map((el, index) => {
     if (el !== null) {
       el.dataset.index = index;
@@ -157,7 +157,6 @@ function showBooks() {
       : el.parentNode.parentNode.classList.add("readEffect");
 
     el.addEventListener("change", (e) => {
-      el.checked = myLibrary[index].toogleRead();
       el.checked === true
         ? el.parentNode.parentNode.classList.add("readEffect")
         : el.parentNode.parentNode.classList.remove("readEffect");
@@ -232,7 +231,7 @@ function addBookToLibrary() {
     content.append(newBookCard);
     const myInputChecked = content.lastChild.lastChild.firstElementChild;
     if (newBook.read === true) {
-      myInputChecked.checked = true;
+      myInputChecked.checked = newBook.read;
       myInputChecked.parentNode.parentNode.classList.add("readEffect");
     } else {
       myInputChecked.removeAttribute("checked");
@@ -240,7 +239,6 @@ function addBookToLibrary() {
     }
     myInputChecked.addEventListener("change", (e) => {
       for (let i = 0; i < bookCardsDom.length; i++) {
-        myInputChecked.checked = newBook.toogleRead();
         myInputChecked.checked === false
           ? myInputChecked.parentNode.parentNode.classList.remove("readEffect")
           : myInputChecked.parentNode.parentNode.classList.add("readEffect");
@@ -254,38 +252,42 @@ function addBookToLibrary() {
 function removeBookFromLibrary() {
   const deleteButtons = document.querySelectorAll(".delete");
   deleteButtons.forEach((btn) =>
-    btn.addEventListener("click", (e) => {
-      e.stopImmediatePropagation();
-      let deleteQuestion = confirm(
-        "Are you sure you want to delete this book?"
-      );
-      if (deleteQuestion) {
-        let indexForDelete =
-          e.target.parentNode.parentNode.parentNode.dataset.index;
-        bookCardsDom.splice(indexForDelete, 1);
-        e.target.parentNode.parentNode.parentNode.remove();
-        myLibrary.splice(indexForDelete, 1);
+    btn.addEventListener(
+      "click",
+      (e) => {
+        e.stopImmediatePropagation();
+        let deleteQuestion = confirm(
+          "Are you sure you want to delete this book?"
+        );
+        if (deleteQuestion) {
+          let indexForDelete =
+            e.target.parentNode.parentNode.parentNode.dataset.index;
+          bookCardsDom.splice(indexForDelete, 1);
+          e.target.parentNode.parentNode.parentNode.remove();
+          myLibrary.splice(indexForDelete, 1);
 
-        const cards = [...document.querySelectorAll(".book-card")];
-        for (let i = 0; i < myLibrary.length; i++) {
-          for (let j = 0; j < cards.length; j++) {
-            cards[j].dataset.index = j;
-            cards[j].lastElementChild.firstChild.nextSibling.setAttribute(
-              "id",
-              `alreadyRead-${j}`
-            );
-            cards[
-              j
-            ].lastElementChild.firstChild.nextSibling.nextSibling.setAttribute(
-              "for",
-              `alreadyRead-${j}`
-            );
+          const cards = [...document.querySelectorAll(".book-card")];
+          for (let i = 0; i < myLibrary.length; i++) {
+            for (let j = 0; j < cards.length; j++) {
+              cards[j].dataset.index = j;
+              cards[j].lastElementChild.firstChild.nextSibling.setAttribute(
+                "id",
+                `alreadyRead-${j}`
+              );
+              cards[
+                j
+              ].lastElementChild.firstChild.nextSibling.nextSibling.setAttribute(
+                "for",
+                `alreadyRead-${j}`
+              );
+            }
           }
+        } else {
+          return;
         }
-      } else {
-        return;
-      }
-    })
+      },
+      { capture: true }
+    )
   );
 }
 
