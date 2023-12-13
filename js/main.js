@@ -152,9 +152,19 @@ function showBooks() {
 
   readDom.map((el, index) => {
     el.checked = myLibrary[index].read;
-    el.addEventListener("click", () => {
-      el.checked = myLibrary[index].toogleRead(read);
+    el.checked === false
+      ? el.parentNode.parentNode.classList.remove("readEffect")
+      : el.parentNode.parentNode.classList.add("readEffect");
+
+    el.addEventListener("change", (e) => {
+      el.checked = myLibrary[index].toogleRead();
+      el.checked === true
+        ? el.parentNode.parentNode.classList.add("readEffect")
+        : el.parentNode.parentNode.classList.remove("readEffect");
     });
+
+    el.setAttribute("id", `alreadyRead-${index}`);
+    el.nextElementSibling.setAttribute("for", `alreadyRead-${index}`);
   });
 }
 
@@ -177,7 +187,7 @@ function addBookToLibrary() {
         ? (this.read.value = true)
         : (this.read.value = false)
     );
-    console.log(newBook.read);
+
     const newBookCard = document.createElement("div");
     newBookCard.classList = "book-card";
     newBookCard.innerHTML += `<div class="book-title-container">
@@ -199,9 +209,8 @@ function addBookToLibrary() {
   </div>
   <div class="book-read-container">
     <input class="read" type="checkbox" id="alreadyRead-${
-      myLibrary.length + 1 - 1
-    }" /><label
-      for="alreadyRead-${myLibrary.length + 1 - 1}"
+      myLibrary.length
+    }"/><label for=alreadyRead-${myLibrary.length}
       >Already Read</label
     >
     <div class="book-delete-container">
@@ -224,13 +233,20 @@ function addBookToLibrary() {
     const myInputChecked = content.lastChild.lastChild.firstElementChild;
     if (newBook.read === true) {
       myInputChecked.checked = true;
+      myInputChecked.parentNode.parentNode.classList.add("readEffect");
     } else {
       myInputChecked.removeAttribute("checked");
+      myInputChecked.parentNode.parentNode.classList.remove("readEffect");
     }
-    myInputChecked.addEventListener("click", () => {
-      myInputChecked.checked = newBook.toogleRead();
+    myInputChecked.addEventListener("change", (e) => {
+      for (let i = 0; i < bookCardsDom.length; i++) {
+        myInputChecked.checked = newBook.toogleRead();
+        myInputChecked.checked === false
+          ? myInputChecked.parentNode.parentNode.classList.remove("readEffect")
+          : myInputChecked.parentNode.parentNode.classList.add("readEffect");
+      }
     });
-    console.log(myInputChecked);
+
     removeBookFromLibrary();
   });
 }
@@ -254,10 +270,18 @@ function removeBookFromLibrary() {
         for (let i = 0; i < myLibrary.length; i++) {
           for (let j = 0; j < cards.length; j++) {
             cards[j].dataset.index = j;
+            cards[j].lastElementChild.firstChild.nextSibling.setAttribute(
+              "id",
+              `alreadyRead-${j}`
+            );
+            cards[
+              j
+            ].lastElementChild.firstChild.nextSibling.nextSibling.setAttribute(
+              "for",
+              `alreadyRead-${j}`
+            );
           }
         }
-
-        // return;
       } else {
         return;
       }

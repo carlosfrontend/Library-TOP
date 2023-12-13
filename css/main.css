@@ -27,7 +27,8 @@ body {
   padding: 1em 2em;
   grid-column: 1/2;
   grid-row: 1/2;
-  background-color: #000000;
+  background-color: #080808e0;
+  z-index: 9999;
   position: fixed;
   top: 0;
   width: 100%;
@@ -56,7 +57,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000000c8;
+  background-color: #080808e0;
   z-index: 999;
   padding: 1em 2em;
   grid-column: 1/2;
@@ -261,4 +262,13 @@ input[type='checkbox']{
 
 .book-card-template{
   display: none;
+}
+.book-card.readEffect {
+  text-decoration: line-through;
+  filter: saturate(0);
+  background-color: #109fe6a8;
+  
+}
+.book-card.readEffect > * {
+  color:#000000;
 }
