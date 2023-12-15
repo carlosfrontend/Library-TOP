@@ -84,6 +84,9 @@ body {
 .gh-logo {
   width: 2.8em;
 }
+.gh-logo:hover {
+  transform: scale(.9);
+}
 
 .link {
   text-decoration: none;
@@ -99,8 +102,13 @@ body {
   font-weight: bold;
 }
 
+.link span:hover, link sup:hover {
+  color: #c0e211;
+  
+}
+
 .book-card {
-  border-radius: 10px;
+  border-radius: 9px;
   padding: 10px;
   height: 18em;
   color: #000000;
@@ -120,9 +128,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #61213e59;
+  background-color: #00000024;
   border-radius: 5px;
-  color: #f3edba;
+  color: #000000;
   padding: 0.4em 0.8em;
   font-size: 0.8rem;
 }
@@ -135,16 +143,19 @@ body {
 .book-read-container {
   grid-column: 1/3;
   grid-row: 3/4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
   gap: 0.4em;
 }
 
-.book-read-container label {
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: #1c1c0e;
+  .book-read-container button {
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    width: 120px;
+    outline: none;
 }
 
 .book-thumbnail-container {
@@ -174,13 +185,13 @@ body {
 }
 
 .delete {
-  color: rgba(134, 0, 27, 0.759);
+  color: rgba(27, 25, 25, 0.927);
   cursor: pointer;
   font-size: 2rem;
 }
 
-.delete:hover{
-  color:rgba(27, 25, 25, 0.927);
+.delete:hover {
+  color: #b60027;
 }
 
 #favDialog {
@@ -197,7 +208,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border:2px solid white;
+  border: 2px solid white;
 }
 #favDialog[open] {
   opacity: 1;
@@ -275,66 +286,71 @@ select,
   width: 28%;
 }
 
-input[type="checkbox"] {
-  cursor: pointer;
-  height: 20px;
-  width: 20px;
-  accent-color: rgb(128, 1, 48);
-}
-
 .book-card-template {
   display: none;
-}
-.book-card.readEffect{
-  background-color: #109fe6a8;
-  filter: saturate(0);
-}
-.book-card.readEffect h3, .book-card.readEffect p, .book-card.readEffect span  {
-  text-decoration: line-through;
-}
-
-.book-card.readEffect > .delete {
-  color: #000000;
 }
 
 .book-read-container label {
   user-select: none;
 }
 
-@media screen and (max-width:500px) {
-  html, body{
+button.readed {
+  background-color: #313030e0;
+  color: #b9c462de;
+  box-shadow: 1px 0px 2px #413f3f;
+}
+button.readed:hover {
+  background-color: #313030;
+  color: #b9c462;
+}
+
+button.not-readed {
+  background-color: #fffafa;
+  color: #4f4e26;
+  box-shadow: 1px 0px 2px #12160685;
+}
+
+button.not-readed:hover {
+  background-color: #ffffffd7;
+  color: #41411e;
+  box-shadow: 1px 0px 2px #12160685;
+}
+
+@media screen and (max-width: 500px) {
+  html,
+  body {
     width: 100vw;
   }
-  
-  .header{
+
+  .header {
     width: 100vw;
   }
-  .title{
+  .title {
     font-size: 2rem;
   }
-  .container{
+  .container {
     width: 100vw;
   }
-  .footer{
+  .footer {
     width: 100vw;
   }
-  #content.content{
-   padding-left: 0;
-   padding-right: 0;
+  #content.content {
+    padding-left: 0;
+    padding-right: 0;
   }
- 
-  .add{
+
+  .add {
     font-size: 2rem;
-    right: .5em;
+    right: 0.5em;
   }
   .footer a * {
     font-size: 1rem;
   }
-  #favDialog{
+  #favDialog {
     width: 100%;
     height: 85%;
     top: 3em;
-    padding: .8em 1em;
+    padding: 0.8em 1em;
     flex-wrap: wrap;
     flex-direction: row;
     background-color: #222220f3;
@@ -345,11 +361,14 @@ input[type="checkbox"] {
   #favDialog * {
     width: 100%;
   }
-  #favDialog input, #favDialog label {
+  #favDialog input,
+  #favDialog label {
     font-size: 1rem;
   }
-  #favDialog button{
+  #favDialog button {
     width: 40%;
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 }
+
+
