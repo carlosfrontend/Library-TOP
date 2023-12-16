@@ -172,6 +172,24 @@ function showBooks() {
     el.children[3].children[0].textContent === "true"
       ? (el.children[3].children[0].textContent = "Already Read")
       : (el.children[3].children[0].textContent = "Not Read");
+    el.children[3].children[0].textContent === "Already Read"
+      ? el.children[3].children[0].parentNode.parentNode.classList.add(
+          "less-contrast"
+        )
+      : (el.children[3].children[0].parentNode.parentNode.className =
+          "book-card");
+    el.children[3].children[0].textContent === "Already Read"
+      ? el.children[3].children[0].parentNode.parentNode.children[0].children[0].classList.add(
+          "through"
+        )
+      : (el.children[3].children[0].parentNode.parentNode.children[0].children[0].className =
+          "book-title");
+    el.children[3].children[0].textContent === "Already Read"
+      ? el.children[3].children[0].parentNode.parentNode.children[0].children[1].classList.add(
+          "through"
+        )
+      : (el.children[3].children[0].parentNode.parentNode.children[0].children[1].className =
+          "book-author");
 
     el.children[3].children[0].addEventListener("click", (e) => {
       e.target.textContent = myLibrary[index].toogleRead();
@@ -180,7 +198,6 @@ function showBooks() {
         : (e.target.textContent = "Not Read");
     });
   });
-  console.log(myLibrary);
   const readDom = [...document.querySelectorAll("#read")];
   readDom.forEach((el) => {
     el.textContent === "Already Read"
@@ -188,15 +205,31 @@ function showBooks() {
       : (el.className = "not-readed");
   });
 
-  readDom.forEach(el => el.addEventListener('click', () => {
-    if(el.textContent === 'Already Read'){
-    el.classList.remove('not-readed');
-    el.classList.add('readed');
-    }else{
-      el.classList.remove('readed');
-      el.classList.add('not-readed');
-    }
-  }));
+  readDom.forEach((el) =>
+    el.addEventListener("click", () => {
+      if (el.textContent === "Already Read") {
+        el.classList.remove("not-readed");
+        el.classList.add("readed");
+        el.parentNode.parentElement.classList.add("less-contrast");
+        el.parentNode.parentNode.children[0].children[0].classList.add(
+          "through"
+        );
+        el.parentNode.parentNode.children[0].children[1].classList.add(
+          "through"
+        );
+      } else {
+        el.classList.remove("readed");
+        el.classList.add("not-readed");
+        el.parentNode.parentElement.className = "book-card";
+        el.parentNode.parentNode.children[0].children[0].classList.remove(
+          "through"
+        );
+        el.parentNode.parentNode.children[0].children[1].classList.remove(
+          "through"
+        );
+      }
+    })
+  );
 }
 
 // Create a new object and adds to this the Book prototype
@@ -236,17 +269,61 @@ function addBookToLibrary() {
           "Already Read")
       : (content.lastElementChild.children[3].children[0].textContent =
           "Not Read");
+    content.lastElementChild.children[3].children[0].textContent ===
+    "Already Read"
+      ? (content.lastElementChild.children[3].children[0].className = "readed")
+      : (content.lastElementChild.children[3].children[0].className =
+          "not-readed");
+    content.lastElementChild.children[3].children[0].textContent ===
+    "Already Read"
+      ? content.lastElementChild.children[3].children[0].parentNode.parentNode.classList.add(
+          "less-contrast"
+        )
+      : (content.lastElementChild.children[3].children[0].parentNode.parentNode.className =
+          "book-card");
+
+    content.lastElementChild.children[3].children[0].textContent ===
+    "Already Read"
+      ? content.lastElementChild.children[3].children[0].parentNode.parentNode.children[0].children[0].classList.add(
+          "through"
+        )
+      : (content.lastElementChild.children[3].children[0].parentNode.parentNode.children[0].children[0].className =
+          "book-title");
+    content.lastElementChild.children[3].children[0].textContent ===
+    "Already Read"
+      ? content.lastElementChild.children[3].children[0].parentNode.parentNode.children[0].children[1].classList.add(
+          "through"
+        )
+      : (content.lastElementChild.children[3].children[0].parentNode.parentNode.children[0].children[1].className =
+          "book-author");
+
     const readDom = [...document.querySelectorAll("#read")];
     readDom.map((btn, index) =>
       btn.addEventListener("click", (e) => {
-        e.stopImmediatePropagation();
+        console.dir(e.target.parentNode.parentNode);
+        console.dir(e.target.parentNode.parentNode.children[0].children[0]);
+        console.dir(e.target.parentNode.parentNode.children[0].children[1]);
         e.target.textContent = myLibrary[index].toogleRead();
         e.target.textContent === "true"
           ? (e.target.textContent = "Already Read")
           : (e.target.textContent = "Not Read");
+        if (e.target.textContent === "Already Read") {
+          e.target.classList.remove("not-readed");
+          e.target.classList.add("readed");
+          e.target.parentNode.parentNode.className = 'book-card less-contrast';
+          e.target.parentNode.parentNode.children[0].children[0].className = 'book-title through';
+          e.target.parentNode.parentNode.children[0].children[1].className = 'book-author through';
+        } else {
+          e.target.classList.remove("readed");
+          e.target.classList.add("not-readed");
+          e.target.parentNode.parentNode.className = 'book-card';
+          e.target.parentNode.parentNode.children[0].children[0].className = 'book-title';
+          e.target.parentNode.parentNode.children[0].children[1].className = 'book-author';
+        }
       })
     );
     bookForm.reset(); // Reset the fields of the form
+    console.log(myLibrary);
   });
 }
 showBooks();

@@ -316,6 +316,15 @@ button.not-readed:hover {
   box-shadow: 1px 0px 2px #12160685;
 }
 
+.book-card.less-contrast{
+  filter: contrast(28%);
+}
+
+h3.through,  p.through{
+  text-decoration: line-through;
+}
+
+
 @media screen and (max-width: 500px) {
   html,
   body {
