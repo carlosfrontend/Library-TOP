@@ -1,6 +1,8 @@
 // IIFE for open and close the dialog
 
 (() => {
+  document.querySelector("#alreadyRead").children[0].textContent = "Yes";
+  document.querySelector("#alreadyRead").children[1].textContent = "No";
   const updateButton = document.querySelector(".add");
   const cancelButton = document.getElementById("cancel");
   const favDialog = document.getElementById("favDialog");
@@ -310,15 +312,19 @@ function addBookToLibrary() {
         if (e.target.textContent === "Already Read") {
           e.target.classList.remove("not-readed");
           e.target.classList.add("readed");
-          e.target.parentNode.parentNode.className = 'book-card less-contrast';
-          e.target.parentNode.parentNode.children[0].children[0].className = 'book-title through';
-          e.target.parentNode.parentNode.children[0].children[1].className = 'book-author through';
+          e.target.parentNode.parentNode.className = "book-card less-contrast";
+          e.target.parentNode.parentNode.children[0].children[0].className =
+            "book-title through";
+          e.target.parentNode.parentNode.children[0].children[1].className =
+            "book-author through";
         } else {
           e.target.classList.remove("readed");
           e.target.classList.add("not-readed");
-          e.target.parentNode.parentNode.className = 'book-card';
-          e.target.parentNode.parentNode.children[0].children[0].className = 'book-title';
-          e.target.parentNode.parentNode.children[0].children[1].className = 'book-author';
+          e.target.parentNode.parentNode.className = "book-card";
+          e.target.parentNode.parentNode.children[0].children[0].className =
+            "book-title";
+          e.target.parentNode.parentNode.children[0].children[1].className =
+            "book-author";
         }
       })
     );
