@@ -174,7 +174,6 @@ function showBooks() {
       : (el.children[3].children[0].textContent = "Not Read");
 
     el.children[3].children[0].addEventListener("click", (e) => {
-      e.stopImmediatePropagation();
       e.target.textContent = myLibrary[index].toogleRead();
       e.target.textContent === "true"
         ? (e.target.textContent = "Already Read")
@@ -188,6 +187,16 @@ function showBooks() {
       ? (el.className = "readed")
       : (el.className = "not-readed");
   });
+
+  readDom.forEach(el => el.addEventListener('click', () => {
+    if(el.textContent === 'Already Read'){
+    el.classList.remove('not-readed');
+    el.classList.add('readed');
+    }else{
+      el.classList.remove('readed');
+      el.classList.add('not-readed');
+    }
+  }));
 }
 
 // Create a new object and adds to this the Book prototype
