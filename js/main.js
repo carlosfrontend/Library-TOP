@@ -210,7 +210,6 @@ function addBookToLibrary() {
           "book-author"); // title normally class
 
     bookForm.reset(); // Reset the fields of the form
-    console.log(myLibrary);
   });
 }
 // Function to show all books
@@ -245,12 +244,10 @@ function showBooks() {
         : (el.children[0].children[1].className = "book-author"); // author normally class
     });
   });
-
-  console.log(myLibrary);
 }
 // Function that remove books from  myLibrary array from the delete button
 function removeBookFromLibrary(event) {
-  // console.log(event.target.parentNode.parentNode.parentNode.dataset.index)
+
   for (let i = 0; i < myLibrary.length; i++) {
     if (
       myLibrary[i].id ===
@@ -259,7 +256,6 @@ function removeBookFromLibrary(event) {
      if(confirm('Are you sure you want delete this Book?')){
       myLibrary.splice(i, 1);
       event.target.parentNode.parentNode.parentNode.remove();
-      console.log(myLibrary);
      }else{
       return;
      }
