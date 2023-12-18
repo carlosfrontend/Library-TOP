@@ -256,9 +256,13 @@ function removeBookFromLibrary(event) {
       myLibrary[i].id ===
       event.target.parentNode.parentNode.parentNode.dataset.index
     ) {
+     if(confirm('Are you sure you want delete this Book?')){
       myLibrary.splice(i, 1);
       event.target.parentNode.parentNode.parentNode.remove();
       console.log(myLibrary);
+     }else{
+      return;
+     }
     }
   }
 }
