@@ -19,11 +19,6 @@
 // Global variables
 
 const content = document.querySelector("#content.content");
-const titleDom = document.querySelector(".book-title");
-const authorDom = document.querySelector(".book-author");
-const srcDom = document.querySelector(".thumbnail");
-const isbnDom = document.querySelector(".book-isbn");
-const pagesDom = document.querySelector(".book-pages");
 const bookForm = document.querySelector("#bookForm");
 const cardTemplate = `
 <div class="book-card">
@@ -43,9 +38,9 @@ alt="book thumbnail"
 <span class="book-isbn"></span><span class="book-pages"></span>
 </div>
 <div class="book-read-container">
-<button id="read" type="button"></button>
+<button id="read" type="button" onclick="updateStatus(event)"></button>
 <div class="book-delete-container">
-<i translate="no" class="material-icons delete">delete_forever</i>
+<i translate="no" class="material-icons delete" onclick="removeBookFromLibrary(event)">delete_forever</i>
 </div>
 </div>
 </div>
@@ -63,8 +58,9 @@ function Book(title, author, isbn, src, pages, read) {
   this.src = src;
   this.pages = pages;
   this.read = read;
+  this.id = self.crypto.randomUUID();
 }
-Book.prototype.toogleRead = function () {
+Book.prototype.toggleRead = function () {
   this.read === true ? (this.read = false) : (this.read = true);
   return this.read;
 };
@@ -154,96 +150,13 @@ myLibrary.push(book7);
 myLibrary.push(book8);
 myLibrary.push(book9);
 
-// Function to show all books
-
-function showBooks() {
-  myLibrary.map((el) => {
-    content.innerHTML += cardTemplate;
-  });
-
-  const bookCardsDom = [...document.querySelectorAll(".book-card")];
-
-  bookCardsDom.map((el, index) => {
-    el.dataset.index = index;
-    el.children[0].children[0].textContent = myLibrary[index].title;
-    el.children[0].children[1].textContent = myLibrary[index].author;
-    el.children[1].children[0].src = myLibrary[index].src;
-    el.children[2].children[0].textContent = myLibrary[index].isbn;
-    el.children[2].children[1].textContent = myLibrary[index].pages;
-    el.children[3].children[0].textContent = myLibrary[index].read;
-    el.children[3].children[0].textContent === "true"
-      ? (el.children[3].children[0].textContent = "Already Read")
-      : (el.children[3].children[0].textContent = "Not Read");
-    el.children[3].children[0].textContent === "Already Read"
-      ? el.children[3].children[0].parentNode.parentNode.classList.add(
-          "less-contrast"
-        )
-      : (el.children[3].children[0].parentNode.parentNode.className =
-          "book-card");
-    el.children[3].children[0].textContent === "Already Read"
-      ? el.children[3].children[0].parentNode.parentNode.children[0].children[0].classList.add(
-          "through"
-        )
-      : (el.children[3].children[0].parentNode.parentNode.children[0].children[0].className =
-          "book-title");
-    el.children[3].children[0].textContent === "Already Read"
-      ? el.children[3].children[0].parentNode.parentNode.children[0].children[1].classList.add(
-          "through"
-        )
-      : (el.children[3].children[0].parentNode.parentNode.children[0].children[1].className =
-          "book-author");
-
-    el.children[3].children[0].addEventListener("click", (e) => {
-      e.target.textContent = myLibrary[index].toogleRead();
-      e.target.textContent === "true"
-        ? (e.target.textContent = "Already Read")
-        : (e.target.textContent = "Not Read");
-    });
-  });
-  const readDom = [...document.querySelectorAll("#read")];
-  readDom.forEach((el) => {
-    el.textContent === "Already Read"
-      ? (el.className = "readed")
-      : (el.className = "not-readed");
-  });
-
-  readDom.forEach((el) =>
-    el.addEventListener("click", () => {
-      if (el.textContent === "Already Read") {
-        el.classList.remove("not-readed");
-        el.classList.add("readed");
-        el.parentNode.parentElement.classList.add("less-contrast");
-        el.parentNode.parentNode.children[0].children[0].classList.add(
-          "through"
-        );
-        el.parentNode.parentNode.children[0].children[1].classList.add(
-          "through"
-        );
-      } else {
-        el.classList.remove("readed");
-        el.classList.add("not-readed");
-        el.parentNode.parentElement.className = "book-card";
-        el.parentNode.parentNode.children[0].children[0].classList.remove(
-          "through"
-        );
-        el.parentNode.parentNode.children[0].children[1].classList.remove(
-          "through"
-        );
-      }
-    })
-  );
-}
-
-// Create a new object and adds to this the Book prototype
-
 let newBook = new Book();
 
 // Function that adds new books to myLibrary array from the user input
 function addBookToLibrary() {
   bookForm.addEventListener("submit", (e) => {
-    // e.preventDefault();
-    // Get data of the form at submit
     newBook = new Book(); // Create a blank instance of Book
+    // Get data of the form at submit
     newBook.title = document.getElementById("title").value;
     newBook.author = document.getElementById("author").value;
     newBook.isbn = Number(document.getElementById("isbn-Num").value); // Convert string to number
@@ -251,86 +164,134 @@ function addBookToLibrary() {
     newBook.pages = Number(document.getElementById("pagesNum").value); // Convert string to number
     newBook.read = document.getElementById("alreadyRead").value;
     newBook.read === "true" ? (newBook.read = true) : (newBook.read = false); // Convert string to boolean
+    newBook.id;
+
     content.innerHTML += cardTemplate;
     myLibrary.push(newBook); // Add the book to the arrray
-    content.lastElementChild.dataset.index = myLibrary.length - 1;
     content.lastElementChild.children[0].children[0].textContent =
       newBook.title;
     content.lastElementChild.children[0].children[1].textContent =
       newBook.author;
     content.lastElementChild.children[1].children[0].src = newBook.src;
-    content.lastElementChild.children[2].children[0].textContent = parseInt(
+    content.lastElementChild.children[2].children[0].textContent = `ISBN: ${parseInt(
       newBook.isbn
-    );
-    content.lastElementChild.children[2].children[1].textContent = parseInt(
+    )}`;
+    content.lastElementChild.children[2].children[1].textContent = `${parseInt(
       newBook.pages
-    );
+    )} pages`;
     content.lastElementChild.children[3].children[0].textContent = newBook.read;
+    content.lastElementChild.dataset.index = newBook.id;
     content.lastElementChild.children[3].children[0].textContent === "true"
       ? (content.lastElementChild.children[3].children[0].textContent =
-          "Already Read")
+          "Readed")
       : (content.lastElementChild.children[3].children[0].textContent =
-          "Not Read");
-    content.lastElementChild.children[3].children[0].textContent ===
-    "Already Read"
-      ? (content.lastElementChild.children[3].children[0].className = "readed")
+          "Unreaded");
+    content.lastElementChild.children[3].children[0].textContent === "Readed"
+      ? content.lastElementChild.children[3].children[0].classList.add("readed")
       : (content.lastElementChild.children[3].children[0].className =
           "not-readed");
-    content.lastElementChild.children[3].children[0].textContent ===
-    "Already Read"
-      ? content.lastElementChild.children[3].children[0].parentNode.parentNode.classList.add(
+    content.lastElementChild.children[3].children[0].textContent === "Readed"
+      ? content.lastElementChild.children[3].children[0].parentElement.parentElement.classList.add(
           "less-contrast"
+        ) // card less-contrast
+      : (content.lastElementChild.children[3].children[0].parentElement.parentElement.className =
+          "book-card"); // card normally class
+    content.lastElementChild.children[3].children[0].textContent === "Readed"
+      ? content.lastElementChild.children[3].children[0].parentElement.parentElement.firstElementChild.children[0].classList.add(
+          "through" // title through class
         )
-      : (content.lastElementChild.children[3].children[0].parentNode.parentNode.className =
-          "book-card");
+      : (content.lastElementChild.children[3].children[0].parentElement.parentElement.firstElementChild.children[0].className =
+          "book-title"); // title normally class
+    content.lastElementChild.children[3].children[0].textContent === "Readed"
+      ? content.lastElementChild.children[3].children[0].parentElement.parentElement.firstElementChild.children[1].classList.add(
+          "through" // title through class
+        )
+      : (content.lastElementChild.children[3].children[0].parentElement.parentElement.firstElementChild.children[1].className =
+          "book-author"); // title normally class
 
-    content.lastElementChild.children[3].children[0].textContent ===
-    "Already Read"
-      ? content.lastElementChild.children[3].children[0].parentNode.parentNode.children[0].children[0].classList.add(
-          "through"
-        )
-      : (content.lastElementChild.children[3].children[0].parentNode.parentNode.children[0].children[0].className =
-          "book-title");
-    content.lastElementChild.children[3].children[0].textContent ===
-    "Already Read"
-      ? content.lastElementChild.children[3].children[0].parentNode.parentNode.children[0].children[1].classList.add(
-          "through"
-        )
-      : (content.lastElementChild.children[3].children[0].parentNode.parentNode.children[0].children[1].className =
-          "book-author");
-
-    const readDom = [...document.querySelectorAll("#read")];
-    readDom.map((btn, index) =>
-      btn.addEventListener("click", (e) => {
-        console.dir(e.target.parentNode.parentNode);
-        console.dir(e.target.parentNode.parentNode.children[0].children[0]);
-        console.dir(e.target.parentNode.parentNode.children[0].children[1]);
-        e.target.textContent = myLibrary[index].toogleRead();
-        e.target.textContent === "true"
-          ? (e.target.textContent = "Already Read")
-          : (e.target.textContent = "Not Read");
-        if (e.target.textContent === "Already Read") {
-          e.target.classList.remove("not-readed");
-          e.target.classList.add("readed");
-          e.target.parentNode.parentNode.className = "book-card less-contrast";
-          e.target.parentNode.parentNode.children[0].children[0].className =
-            "book-title through";
-          e.target.parentNode.parentNode.children[0].children[1].className =
-            "book-author through";
-        } else {
-          e.target.classList.remove("readed");
-          e.target.classList.add("not-readed");
-          e.target.parentNode.parentNode.className = "book-card";
-          e.target.parentNode.parentNode.children[0].children[0].className =
-            "book-title";
-          e.target.parentNode.parentNode.children[0].children[1].className =
-            "book-author";
-        }
-      })
-    );
     bookForm.reset(); // Reset the fields of the form
     console.log(myLibrary);
   });
+}
+// Function to show all books
+
+function showBooks() {
+  myLibrary.map((el) => {
+    content.innerHTML += cardTemplate;
+    const bookCardsDom = [...document.querySelectorAll(".book-card")];
+
+    bookCardsDom.map((el, index) => {
+      el.children[0].children[0].textContent = myLibrary[index].title;
+      el.children[0].children[1].textContent = myLibrary[index].author;
+      el.children[1].children[0].src = myLibrary[index].src;
+      el.children[2].children[0].textContent = `ISBN: ${myLibrary[index].isbn}`;
+      el.children[2].children[1].textContent = `${myLibrary[index].pages} pages`;
+      el.children[3].children[0].textContent = myLibrary[index].read;
+      el.children[3].children[0].textContent === "true"
+        ? (el.children[3].children[0].textContent = "Readed")
+        : (el.children[3].children[0].textContent = "Unreaded");
+      el.children[3].children[0].textContent === "Readed"
+        ? el.children[3].children[0].classList.add("readed")
+        : (el.children[3].children[0].className = "not-readed");
+      el.children[3].children[0].textContent === "Readed"
+        ? el.classList.add("less-contrast") // card less-contrast
+        : (el.className = "book-card"); // card normally class
+      el.children[3].children[0].textContent === "Readed"
+        ? el.children[0].children[0].classList.add("through") // title through
+        : (el.children[0].children[0].className = "book-title"); // title normaly class
+      el.dataset.index = myLibrary[index].id;
+      el.children[3].children[0].textContent === "Readed"
+        ? el.children[0].children[1].classList.add("through") // author through
+        : (el.children[0].children[1].className = "book-author"); // author normally class
+    });
+  });
+
+  console.log(myLibrary);
+}
+// Function that remove books from  myLibrary array from the delete button
+function removeBookFromLibrary(event) {
+  // console.log(event.target.parentNode.parentNode.parentNode.dataset.index)
+  for (let i = 0; i < myLibrary.length; i++) {
+    if (
+      myLibrary[i].id ===
+      event.target.parentNode.parentNode.parentNode.dataset.index
+    ) {
+      myLibrary.splice(i, 1);
+      event.target.parentNode.parentNode.parentNode.remove();
+      console.log(myLibrary);
+    }
+  }
+}
+function updateStatus(event) {
+  for (let i = 0; i < myLibrary.length; i++) {
+    if (myLibrary[i].id === event.target.parentNode.parentNode.dataset.index) {
+      event.target.textContent = myLibrary[i].toggleRead();
+      event.target.textContent === "true"
+        ? (event.target.textContent = "Readed")
+        : (event.target.textContent = "Unreaded");
+      if (event.target.textContent === "Unreaded") {
+        event.target.className = 'not-readed';
+        event.target.parentElement.parentElement.classList.remove(
+          "less-contrast"
+        ); // remove less-contrast class in the card
+        event.target.parentElement.parentElement.children[0].children[0].classList.remove(
+          "through"
+        ); // remove title through class
+        event.target.parentElement.parentElement.children[0].children[1].classList.remove(
+          "through"
+        ); // remove author through class
+      } else {
+        event.target.className = 'readed';
+        event.target.parentElement.parentElement.classList.add("less-contrast");
+        event.target.parentElement.parentElement.children[0].children[0].classList.add(
+          "through"
+        ); // add title through class
+        event.target.parentElement.parentElement.children[0].children[1].classList.add(
+          "through"
+        ); // add author through class
+      }
+    }
+  }
 }
 showBooks();
 addBookToLibrary();

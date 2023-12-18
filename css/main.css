@@ -317,7 +317,7 @@ button.not-readed:hover {
 }
 
 .book-card.less-contrast{
-  filter: contrast(28%);
+  filter: contrast(48%);
 }
 
 h3.through,  p.through{
