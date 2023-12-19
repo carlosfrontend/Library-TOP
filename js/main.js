@@ -150,12 +150,10 @@ myLibrary.push(book7);
 myLibrary.push(book8);
 myLibrary.push(book9);
 
-let newBook = new Book();
-
 // Function that adds new books to myLibrary array from the user input
 function addBookToLibrary() {
   bookForm.addEventListener("submit", (e) => {
-    newBook = new Book(); // Create a blank instance of Book
+    const newBook = new Book(); // Create a blank instance of Book
     // Get data of the form at submit
     newBook.title = document.getElementById("title").value;
     newBook.author = document.getElementById("author").value;
