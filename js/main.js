@@ -48,22 +48,26 @@ alt="book thumbnail"
 
 let myLibrary = [];
 
-// Create the Book constructor
+// Create the Book class
 
-function Book(title, author, isbn, src, pages, read) {
-  // Properties
-  this.title = title;
-  this.author = author;
-  this.isbn = isbn;
-  this.src = src;
-  this.pages = pages;
-  this.read = read;
-  this.id = self.crypto.randomUUID();
+class Book {
+  // Constructor
+  constructor(title, author, isbn, src, pages, read) {
+    // Properties
+    this.title = title;
+    this.author = author;
+    this.isbn = isbn;
+    this.src = src;
+    this.pages = pages;
+    this.read = read;
+    this.id = self.crypto.randomUUID();
+  }
+  // Method
+  toggleRead() {
+    this.read === true ? (this.read = false) : (this.read = true);
+    return this.read;
+  }
 }
-Book.prototype.toggleRead = function () {
-  this.read === true ? (this.read = false) : (this.read = true);
-  return this.read;
-};
 
 // Create default books
 
@@ -245,18 +249,17 @@ function showBooks() {
 }
 // Function that remove books from  myLibrary array from the delete button
 function removeBookFromLibrary(event) {
-
   for (let i = 0; i < myLibrary.length; i++) {
     if (
       myLibrary[i].id ===
       event.target.parentNode.parentNode.parentNode.dataset.index
     ) {
-     if(confirm('Are you sure you want delete this Book?')){
-      myLibrary.splice(i, 1);
-      event.target.parentNode.parentNode.parentNode.remove();
-     }else{
-      return;
-     }
+      if (confirm("Are you sure you want delete this Book?")) {
+        myLibrary.splice(i, 1);
+        event.target.parentNode.parentNode.parentNode.remove();
+      } else {
+        return;
+      }
     }
   }
 }
@@ -268,7 +271,7 @@ function updateStatus(event) {
         ? (event.target.textContent = "Readed")
         : (event.target.textContent = "Unreaded");
       if (event.target.textContent === "Unreaded") {
-        event.target.className = 'not-readed';
+        event.target.className = "not-readed";
         event.target.parentElement.parentElement.classList.remove(
           "less-contrast"
         ); // remove less-contrast class in the card
@@ -279,7 +282,7 @@ function updateStatus(event) {
           "through"
         ); // remove author through class
       } else {
-        event.target.className = 'readed';
+        event.target.className = "readed";
         event.target.parentElement.parentElement.classList.add("less-contrast");
         event.target.parentElement.parentElement.children[0].children[0].classList.add(
           "through"
